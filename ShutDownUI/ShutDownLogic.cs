@@ -1,6 +1,4 @@
 ﻿using ShutDownUI.interfaces;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Timers;
 
 
@@ -44,14 +42,11 @@ namespace ShutDownUI
 
                 if (sleep)
                 {
-                    Application.SetSuspendState(PowerState.Suspend, true, true);
-                    //SetSuspendState(false, true, true);
+                    Application.SetSuspendState(PowerState.Suspend, true, false);
                 }
                 else
                 {
-                    Application.SetSuspendState(PowerState.Hibernate, true, true);
-                    //Process.Start("shutdown", "/h /f");
-                    //Process.Start("shutdown", "/s /t 0");
+                    Application.SetSuspendState(PowerState.Hibernate, true, false);
                 }
             }
 
@@ -77,9 +72,6 @@ namespace ShutDownUI
         {
             return started;
         }
-
-        //[DllImport("PowrProf.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        //public static extern bool SetSuspendState(bool hiberate, bool forceCritical, bool disableWakeEvent);
 
     }
 }
