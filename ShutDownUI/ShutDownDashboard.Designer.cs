@@ -1,6 +1,6 @@
 ﻿namespace ShutDownUI
 {
-    partial class ShutDownUI
+    partial class ShutDownDashboard
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,21 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShutDownUI));
-            sdTimer = new System.Windows.Forms.Timer(components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShutDownDashboard));
             sdButtonStart = new Button();
-            sdGraphicCircle = new PictureBox();
             sdLabelTime = new Label();
             sdBoxInput = new TextBox();
             sdLabelInput = new Label();
-            ((System.ComponentModel.ISupportInitialize)sdGraphicCircle).BeginInit();
+            sdModeCheck = new CheckBox();
+            sdGraphicBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)sdGraphicBox).BeginInit();
             SuspendLayout();
-            // 
-            // sdTimer
-            // 
-            sdTimer.Interval = 60000;
-            sdTimer.Tick += sdTimer_Tick;
             // 
             // sdButtonStart
             // 
@@ -58,21 +52,12 @@
             sdButtonStart.UseVisualStyleBackColor = false;
             sdButtonStart.Click += sdButtonStart_Click;
             // 
-            // sdGraphicCircle
-            // 
-            sdGraphicCircle.Image = (Image)resources.GetObject("sdGraphicCircle.Image");
-            sdGraphicCircle.Location = new Point(48, 40);
-            sdGraphicCircle.Name = "sdGraphicCircle";
-            sdGraphicCircle.Size = new Size(128, 128);
-            sdGraphicCircle.TabIndex = 1;
-            sdGraphicCircle.TabStop = false;
-            // 
             // sdLabelTime
             // 
             sdLabelTime.AutoSize = true;
             sdLabelTime.Font = new Font("Segoe UI", 32.25F, FontStyle.Bold, GraphicsUnit.Point);
             sdLabelTime.ForeColor = SystemColors.ButtonHighlight;
-            sdLabelTime.Location = new Point(90, 72);
+            sdLabelTime.Location = new Point(90, 52);
             sdLabelTime.Name = "sdLabelTime";
             sdLabelTime.Size = new Size(50, 59);
             sdLabelTime.TabIndex = 2;
@@ -95,33 +80,55 @@
             sdLabelInput.TabIndex = 4;
             sdLabelInput.Text = "min";
             // 
-            // ShutDownUI
+            // sdModeCheck
+            // 
+            sdModeCheck.AutoSize = true;
+            sdModeCheck.Checked = true;
+            sdModeCheck.CheckState = CheckState.Checked;
+            sdModeCheck.Location = new Point(64, 160);
+            sdModeCheck.Name = "sdModeCheck";
+            sdModeCheck.Size = new Size(109, 25);
+            sdModeCheck.TabIndex = 5;
+            sdModeCheck.Text = "sleep mode";
+            sdModeCheck.UseVisualStyleBackColor = true;
+            // 
+            // sdGraphicBox
+            // 
+            sdGraphicBox.Image = Properties.Resources.circle;
+            sdGraphicBox.Location = new Point(48, 20);
+            sdGraphicBox.Name = "sdGraphicBox";
+            sdGraphicBox.Size = new Size(128, 128);
+            sdGraphicBox.TabIndex = 6;
+            sdGraphicBox.TabStop = false;
+            // 
+            // ShutDownDashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(224, 281);
+            Controls.Add(sdModeCheck);
             Controls.Add(sdLabelInput);
             Controls.Add(sdBoxInput);
             Controls.Add(sdLabelTime);
-            Controls.Add(sdGraphicCircle);
             Controls.Add(sdButtonStart);
+            Controls.Add(sdGraphicBox);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
-            Name = "ShutDownUI";
+            Name = "ShutDownDashboard";
             Text = "ShutDown";
-            ((System.ComponentModel.ISupportInitialize)sdGraphicCircle).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sdGraphicBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer sdTimer;
         private Button sdButtonStart;
-        private PictureBox sdGraphicCircle;
         private Label sdLabelTime;
         private TextBox sdBoxInput;
         private Label sdLabelInput;
+        private CheckBox sdModeCheck;
+        private PictureBox sdGraphicBox;
     }
 }
