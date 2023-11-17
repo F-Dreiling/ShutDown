@@ -45,7 +45,7 @@ namespace ShutDownUI
         private void Start()
         {
             started = true;
-            timer = new System.Timers.Timer(1000);
+            timer = new System.Timers.Timer(60000);
             timer.Elapsed += TickTimer;
             timer.Start();
         }

@@ -1,4 +1,5 @@
 using ShutDownUI.interfaces;
+using System.Diagnostics;
 
 namespace ShutDownUI
 {
@@ -46,27 +47,31 @@ namespace ShutDownUI
 
         private void EnterState()
         {
-            if (sdModeCheck.Checked)
+            if (sdRadio1.Checked)
             {
                 Application.SetSuspendState(PowerState.Suspend, true, false);
             }
-            else
+            else if (sdRadio2.Checked)
             {
                 Application.SetSuspendState(PowerState.Hibernate, true, false);
+            }
+            else if (sdRadio3.Checked)
+            {
+                Process.Start("shutdown", "/s /t 0");
             }
         }
 
         private void EnableUI()
         {
             sdBoxInput.Enabled = true;
-            sdModeCheck.Enabled = true;
+            sdGroupMode.Enabled = true;
             sdButtonStart.Text = "Start";
         }
 
         private void DisableUI()
         {
             sdBoxInput.Enabled = false;
-            sdModeCheck.Enabled = false;
+            sdGroupMode.Enabled = false;
             sdButtonStart.Text = "Stop";
         }
 
