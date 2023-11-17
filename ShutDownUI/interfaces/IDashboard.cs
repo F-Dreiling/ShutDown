@@ -4,6 +4,7 @@
     {
 
         public void UpdateTimer(int time);
+        public void EnterState();
 
     }
 }

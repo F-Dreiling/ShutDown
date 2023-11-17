@@ -1,13 +1,12 @@
 ﻿using ShutDownUI.interfaces;
+using System.Runtime.InteropServices;
 using System.Timers;
-
 
 namespace ShutDownUI
 {
     public class ShutDownLogic: ILogic
     {
         private int time;
-        private bool sleep = true;
         private bool started = false;
         private System.Timers.Timer timer;
         private IDashboard dashboard;
@@ -17,10 +16,9 @@ namespace ShutDownUI
             dashboard = gui;
         }
 
-        public void HitTimer(string input, bool sleepMode) {
+        public void HitTimer(string input) {
 
             time = Convert.ToInt32(input);
-            sleep = sleepMode;
 
             if (started)
             {
@@ -39,15 +37,7 @@ namespace ShutDownUI
             if (time <= 0)
             {
                 Stop();
-
-                if (sleep)
-                {
-                    Application.SetSuspendState(PowerState.Suspend, true, false);
-                }
-                else
-                {
-                    Application.SetSuspendState(PowerState.Hibernate, true, false);
-                }
+                dashboard.EnterState();
             }
 
             dashboard.UpdateTimer(time);

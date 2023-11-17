@@ -1,4 +1,5 @@
 using ShutDownUI.interfaces;
+using System.Runtime.InteropServices;
 
 namespace ShutDownUI
 {
@@ -19,16 +20,6 @@ namespace ShutDownUI
                 if (logic.isStarted())
                 {
                     BeginInvoke(new Action(() => sdLabelTime.Text = time.ToString()), null);
-                    BeginInvoke(new Action(() => sdBoxInput.Enabled = false), null);
-                    BeginInvoke(new Action(() => sdModeCheck.Enabled = false), null);
-                    BeginInvoke(new Action(() => sdButtonStart.Text = "Stop"), null);
-                }
-                else
-                {
-                    BeginInvoke(new Action(() => sdLabelTime.Text = sdBoxInput.Text), null);
-                    BeginInvoke(new Action(() => sdBoxInput.Enabled = true), null);
-                    BeginInvoke(new Action(() => sdModeCheck.Enabled = true), null);
-                    BeginInvoke(new Action(() => sdButtonStart.Text = "Start"), null);
                 }
 
                 BeginInvoke(new Action(() => sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2), null);
@@ -37,7 +28,7 @@ namespace ShutDownUI
 
         private void sdButtonStart_Click(object sender, EventArgs e)
         {
-            logic.HitTimer(sdBoxInput.Text, sdModeCheck.Checked);
+            logic.HitTimer(sdBoxInput.Text);
 
             sdLabelTime.Text = sdBoxInput.Text;
 
@@ -55,6 +46,21 @@ namespace ShutDownUI
             }
 
             sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
+
+        public void EnterState()
+        {
+            if (sdModeCheck.Checked)
+            {
+                SendMessage(this.Handle.ToInt32(), 0x112, 0xF170, 1);
+            }
+            else
+            {
+                Application.SetSuspendState(PowerState.Hibernate, true, true);
+            }
         }
 
     }

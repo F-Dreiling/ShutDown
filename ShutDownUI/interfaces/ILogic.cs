@@ -2,7 +2,7 @@
 {
     public interface ILogic
     {
-        public void HitTimer(string input, bool sleepMode);
+        public void HitTimer(string input);
         public bool isStarted();
 
     }
