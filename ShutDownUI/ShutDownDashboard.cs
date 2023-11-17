@@ -1,5 +1,6 @@
 using ShutDownUI.interfaces;
 using System.Runtime.InteropServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ShutDownUI
 {
@@ -11,19 +12,6 @@ namespace ShutDownUI
         {
             InitializeComponent();
             logic = new ShutDownLogic(this);
-        }
-
-        public void UpdateTimer(int time)
-        {
-            if (InvokeRequired)
-            {
-                if (logic.isStarted())
-                {
-                    BeginInvoke(new Action(() => sdLabelTime.Text = time.ToString()), null);
-                }
-
-                BeginInvoke(new Action(() => sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2), null);
-            }
         }
 
         private void sdButtonStart_Click(object sender, EventArgs e)
@@ -48,14 +36,31 @@ namespace ShutDownUI
             sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2;
         }
 
+        public void UpdateTimer(int time)
+        {
+            if (InvokeRequired)
+            {
+                if (logic.isStarted())
+                {
+                    BeginInvoke(new Action(() => sdLabelTime.Text = time.ToString()), null);
+                }
+                else if (time == 0)
+                {
+                    BeginInvoke(new Action(() => EnterState()), null);
+                }
+
+                BeginInvoke(new Action(() => sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2), null);
+            }
+        }
+
         [DllImport("user32.dll")]
         private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
 
-        public void EnterState()
+        private void EnterState()
         {
             if (sdModeCheck.Checked)
             {
-                SendMessage(this.Handle.ToInt32(), 0x112, 0xF170, 1);
+                SendMessage(Handle.ToInt32(), 0x112, 0xF170, 1);
             }
             else
             {

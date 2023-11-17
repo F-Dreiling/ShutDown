@@ -37,7 +37,6 @@ namespace ShutDownUI
             if (time <= 0)
             {
                 Stop();
-                dashboard.EnterState();
             }
 
             dashboard.UpdateTimer(time);
