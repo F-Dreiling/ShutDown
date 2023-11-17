@@ -156,7 +156,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "ShutDownDashboard";
-            Text = "ShutDown";
             ((System.ComponentModel.ISupportInitialize)sdGraphicBox).EndInit();
             sdGroupMode.ResumeLayout(false);
             sdGroupMode.PerformLayout();
