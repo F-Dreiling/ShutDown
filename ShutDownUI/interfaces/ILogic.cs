@@ -2,7 +2,7 @@
 {
     public interface ILogic
     {
-        public void HitTimer(string input);
+        public void HitTimer(string input, int mode);
         public bool isStarted();
 
     }

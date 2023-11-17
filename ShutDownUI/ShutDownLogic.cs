@@ -1,5 +1,5 @@
 ﻿using ShutDownUI.interfaces;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.Timers;
 
 namespace ShutDownUI
@@ -8,6 +8,7 @@ namespace ShutDownUI
     {
         private int time;
         private bool started = false;
+        private int mode;
         private System.Timers.Timer timer;
         private IDashboard dashboard;
 
@@ -16,9 +17,10 @@ namespace ShutDownUI
             dashboard = gui;
         }
 
-        public void HitTimer(string input) {
+        public void HitTimer(string input, int mode) {
 
             time = Convert.ToInt32(input);
+            this.mode = mode;
 
             if (started)
             {
@@ -33,13 +35,29 @@ namespace ShutDownUI
         private void TickTimer(object? sender, ElapsedEventArgs e)
         {
             time--;
+            dashboard.UpdateTimer(time);
 
             if (time <= 0)
             {
                 Stop();
+                EnterState();
             }
+        }
 
-            dashboard.UpdateTimer(time);
+        private void EnterState()
+        {
+            if (mode == 2)
+            {
+                Process.Start("shutdown", "/s /t 0");
+            }
+            else if (mode == 1)
+            {
+                Application.SetSuspendState(PowerState.Hibernate, true, false);
+            }
+            else
+            {
+                Application.SetSuspendState(PowerState.Suspend, true, false);
+            }
         }
 
         private void Start()

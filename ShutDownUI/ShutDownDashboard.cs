@@ -1,5 +1,4 @@
 using ShutDownUI.interfaces;
-using System.Diagnostics;
 
 namespace ShutDownUI
 {
@@ -15,7 +14,7 @@ namespace ShutDownUI
 
         private void sdButtonStart_Click(object sender, EventArgs e)
         {
-            logic.HitTimer(sdBoxInput.Text);
+            logic.HitTimer(sdBoxInput.Text, CheckMode());
 
             sdLabelTime.Text = sdBoxInput.Text;
             sdLabelTime.Left = (Width - (sdLabelTime.Width + 8)) / 2;
@@ -40,25 +39,15 @@ namespace ShutDownUI
                 if (time == 0)
                 {
                     BeginInvoke(new Action(() => EnableUI()), null);
-                    BeginInvoke(new Action(() => EnterState()), null);
                 }
             }
         }
 
-        private void EnterState()
+        private int CheckMode()
         {
-            if (sdRadio1.Checked)
-            {
-                Application.SetSuspendState(PowerState.Suspend, true, false);
-            }
-            else if (sdRadio2.Checked)
-            {
-                Application.SetSuspendState(PowerState.Hibernate, true, false);
-            }
-            else if (sdRadio3.Checked)
-            {
-                Process.Start("shutdown", "/s /t 0");
-            }
+            if (sdRadio3.Checked) return 2;
+            else if (sdRadio2.Checked) return 1;
+            else return 0;
         }
 
         private void EnableUI()

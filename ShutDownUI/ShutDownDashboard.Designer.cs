@@ -47,10 +47,10 @@
             sdButtonStart.BackColor = SystemColors.ButtonHighlight;
             sdButtonStart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             sdButtonStart.ForeColor = SystemColors.ActiveCaptionText;
-            sdButtonStart.Location = new Point(64, 243);
+            sdButtonStart.Location = new Point(20, 243);
             sdButtonStart.Margin = new Padding(4);
             sdButtonStart.Name = "sdButtonStart";
-            sdButtonStart.Size = new Size(96, 32);
+            sdButtonStart.Size = new Size(128, 32);
             sdButtonStart.TabIndex = 0;
             sdButtonStart.Text = "Start";
             sdButtonStart.UseVisualStyleBackColor = false;
@@ -61,7 +61,7 @@
             sdLabelTime.AutoSize = true;
             sdLabelTime.Font = new Font("Segoe UI", 32.25F, FontStyle.Bold, GraphicsUnit.Point);
             sdLabelTime.ForeColor = SystemColors.ButtonHighlight;
-            sdLabelTime.Location = new Point(90, 44);
+            sdLabelTime.Location = new Point(62, 44);
             sdLabelTime.Name = "sdLabelTime";
             sdLabelTime.Size = new Size(50, 59);
             sdLabelTime.TabIndex = 2;
@@ -69,25 +69,25 @@
             // 
             // sdBoxInput
             // 
-            sdBoxInput.Location = new Point(64, 282);
+            sdBoxInput.Location = new Point(24, 282);
             sdBoxInput.Name = "sdBoxInput";
-            sdBoxInput.Size = new Size(50, 29);
+            sdBoxInput.Size = new Size(60, 29);
             sdBoxInput.TabIndex = 3;
             sdBoxInput.Text = "0";
             // 
             // sdLabelInput
             // 
             sdLabelInput.AutoSize = true;
-            sdLabelInput.Location = new Point(124, 285);
+            sdLabelInput.Location = new Point(104, 285);
             sdLabelInput.Name = "sdLabelInput";
-            sdLabelInput.Size = new Size(37, 21);
+            sdLabelInput.Size = new Size(44, 21);
             sdLabelInput.TabIndex = 4;
-            sdLabelInput.Text = "min";
+            sdLabelInput.Text = "mins";
             // 
             // sdGraphicBox
             // 
             sdGraphicBox.Image = Properties.Resources.circle;
-            sdGraphicBox.Location = new Point(48, 12);
+            sdGraphicBox.Location = new Point(20, 12);
             sdGraphicBox.Name = "sdGraphicBox";
             sdGraphicBox.Size = new Size(128, 128);
             sdGraphicBox.TabIndex = 6;
@@ -98,7 +98,7 @@
             sdGroupMode.Controls.Add(sdRadio3);
             sdGroupMode.Controls.Add(sdRadio2);
             sdGroupMode.Controls.Add(sdRadio1);
-            sdGroupMode.Location = new Point(48, 146);
+            sdGroupMode.Location = new Point(20, 146);
             sdGroupMode.Name = "sdGroupMode";
             sdGroupMode.Size = new Size(128, 90);
             sdGroupMode.TabIndex = 7;
@@ -145,7 +145,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
-            ClientSize = new Size(224, 321);
+            ClientSize = new Size(168, 321);
             Controls.Add(sdGroupMode);
             Controls.Add(sdLabelInput);
             Controls.Add(sdBoxInput);
