@@ -1,6 +1,4 @@
 using ShutDownUI.interfaces;
-using System.Runtime.InteropServices;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ShutDownUI
 {
@@ -19,53 +17,57 @@ namespace ShutDownUI
             logic.HitTimer(sdBoxInput.Text);
 
             sdLabelTime.Text = sdBoxInput.Text;
+            sdLabelTime.Left = (Width - (sdLabelTime.Width + 8)) / 2;
 
             if (logic.isStarted())
             {
-                sdBoxInput.Enabled = false;
-                sdModeCheck.Enabled = false;
-                sdButtonStart.Text = "Stop";
+                DisableUI();
             }
             else
             {
-                sdBoxInput.Enabled = true;
-                sdModeCheck.Enabled = true;
-                sdButtonStart.Text = "Start";
+                EnableUI();
             }
-
-            sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2;
         }
 
         public void UpdateTimer(int time)
         {
             if (InvokeRequired)
             {
-                if (logic.isStarted())
+                BeginInvoke(new Action(() => sdLabelTime.Text = time.ToString()), null);
+                BeginInvoke(new Action(() => sdLabelTime.Left = (Width - (sdLabelTime.Width + 10)) / 2), null);
+
+                if (time == 0)
                 {
-                    BeginInvoke(new Action(() => sdLabelTime.Text = time.ToString()), null);
-                }
-                else if (time == 0)
-                {
+                    BeginInvoke(new Action(() => EnableUI()), null);
                     BeginInvoke(new Action(() => EnterState()), null);
                 }
-
-                BeginInvoke(new Action(() => sdLabelTime.Left = (this.Width - (sdLabelTime.Width + 8)) / 2), null);
             }
         }
-
-        [DllImport("user32.dll")]
-        private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
 
         private void EnterState()
         {
             if (sdModeCheck.Checked)
             {
-                SendMessage(Handle.ToInt32(), 0x112, 0xF170, 1);
+                Application.SetSuspendState(PowerState.Suspend, true, false);
             }
             else
             {
-                Application.SetSuspendState(PowerState.Hibernate, true, true);
+                Application.SetSuspendState(PowerState.Hibernate, true, false);
             }
+        }
+
+        private void EnableUI()
+        {
+            sdBoxInput.Enabled = true;
+            sdModeCheck.Enabled = true;
+            sdButtonStart.Text = "Start";
+        }
+
+        private void DisableUI()
+        {
+            sdBoxInput.Enabled = false;
+            sdModeCheck.Enabled = false;
+            sdButtonStart.Text = "Stop";
         }
 
     }
