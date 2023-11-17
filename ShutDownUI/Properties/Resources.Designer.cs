@@ -83,9 +83,9 @@ namespace ShutDownUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon logo {
+        internal static System.Drawing.Icon thumbnail {
             get {
-                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                object obj = ResourceManager.GetObject("thumbnail", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
