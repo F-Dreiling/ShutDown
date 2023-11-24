@@ -73,7 +73,7 @@
             sdBoxInput.Name = "sdBoxInput";
             sdBoxInput.Size = new Size(60, 29);
             sdBoxInput.TabIndex = 3;
-            sdBoxInput.Text = "0";
+            sdBoxInput.Text = "30";
             // 
             // sdLabelInput
             // 
